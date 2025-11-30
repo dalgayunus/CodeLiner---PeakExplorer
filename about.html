@@ -1,0 +1,1124 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haqqımızda | PeakExplorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="about-page">
+    
+    <nav class="navbar navbar-dark">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Ana Səhifə</a></li>
+            <li><a href="index.html#mountains">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="index.html#tours" class="nav-dropdown-trigger">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="index.html#tours" class="submenu-item">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="index.html#map">Xəritə</a></li>
+            <li><a href="index.html#gallery">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" id="searchToggleBtn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span>☰</span>
+                    <span>Menyu</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="about.html" class="active">Haqqımızda</a>
+                    <a href="contact.html">Əlaqə</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="auth-btn login-btn" onclick="window.location.href='index.html'">Giriş</button>
+                <button class="auth-btn signup-btn" onclick="window.location.href='index.html'">Qeydiyyat</button>
+            </div>
+            
+            <div class="nav-dropdown user-dropdown" id="userProfile" style="display: none;">
+                <button class="nav-dropdown-btn user-dropdown-btn" id="userDropdownBtn">
+                    <span class="user-avatar" id="userAvatarNav">👤</span>
+                    <span class="user-name" id="userName"></span>
+                </button>
+                <div class="nav-dropdown-content" id="userDropdownContent">
+                    <a href="profile.html" class="dropdown-item">
+                        <span>👤</span>
+                        <span>Profil</span>
+                    </a>
+                    <button class="dropdown-item logout-item" onclick="logout()">
+                        <span>🚪</span>
+                        <span>Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close-btn" id="searchCloseBtn">✕</button>
+            <div class="search-header">
+                <h2 data-lang-az="Axtar" data-lang-en="Search" data-lang-ru="Поиск" data-lang-tr="Ara">Axtar</h2>
+            </div>
+            <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Dağ, tur və ya məkan axtar..." data-placeholder-az="Dağ, tur və ya məkan axtar..." data-placeholder-en="Search for mountains, tours or locations..." data-placeholder-ru="Поиск гор, туров или мест..." data-placeholder-tr="Dağ, tur veya yer ara...">
+                <button class="search-clear-btn" id="searchClearBtn" style="display: none;">✕</button>
+            </div>
+            <div class="search-filters">
+                <button class="search-filter-btn active" data-filter="all" data-lang-az="Hamısı" data-lang-en="All" data-lang-ru="Все" data-lang-tr="Tümü">Hamısı</button>
+                <button class="search-filter-btn" data-filter="mountains" data-lang-az="Dağlar" data-lang-en="Mountains" data-lang-ru="Горы" data-lang-tr="Dağlar">Dağlar</button>
+                <button class="search-filter-btn" data-filter="tours" data-lang-az="Turlar" data-lang-en="Tours" data-lang-ru="Туры" data-lang-tr="Turlar">Turlar</button>
+            </div>
+            <div class="search-results" id="searchResults">
+                <div class="search-placeholder">
+                    <span>🔍</span>
+                    <p data-lang-az="Axtarış nəticələri burada görünəcək" data-lang-en="Search results will appear here" data-lang-ru="Результаты поиска появятся здесь" data-lang-tr="Arama sonuçları burada görünecek">Axtarış nəticələri burada görünəcək</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <section class="page-hero about-hero">
+        <div class="page-hero-content">
+            <h1 data-lang-az="Haqqımızda" data-lang-en="About Us" data-lang-ru="О нас" data-lang-tr="Hakkımızda">Haqqımızda</h1>
+            <p data-lang-az="PeakExplorer - Azərbaycanın dağ turizmi lideri" data-lang-en="PeakExplorer - Azerbaijan's mountain tourism leader" data-lang-ru="PeakExplorer - лидер горного туризма Азербайджана" data-lang-tr="PeakExplorer - Azerbaycan'ın dağ turizmi lideri">PeakExplorer - Azərbaycanın dağ turizmi lideri</p>
+        </div>
+    </section>
+
+    
+    <section class="about-story">
+        <div class="about-story-container">
+            <div class="story-content">
+                <span class="section-label" data-lang-az="Hekayəmiz" data-lang-en="Our Story" data-lang-ru="Наша история" data-lang-tr="Hikayemiz">Hekayəmiz</span>
+                <h2 data-lang-az="2015-ci ildən dağları sevənlərə xidmət edirik" data-lang-en="Serving mountain lovers since 2015" data-lang-ru="Служим любителям гор с 2015 года" data-lang-tr="2015'ten beri dağ severlere hizmet ediyoruz">2015-ci ildən dağları sevənlərə xidmət edirik</h2>
+                <p data-lang-az="PeakExplorer, Azərbaycanın möhtəşəm dağ mənzərələrini dünyaya tanıtmaq məqsədi ilə bir qrup həvəsli alpinist tərəfindən qurulub. İlk günümüzdən bəri minlərlə turisti dağların sehrli dünyası ilə tanış etdik." data-lang-en="PeakExplorer was founded by a group of passionate alpinists with the goal of introducing Azerbaijan's magnificent mountain landscapes to the world. Since our first day, we have introduced thousands of tourists to the magical world of mountains." data-lang-ru="PeakExplorer был основан группой увлеченных альпинистов с целью познакомить мир с великолепными горными пейзажами Азербайджана. С первого дня мы познакомили тысячи туристов с волшебным миром гор." data-lang-tr="PeakExplorer, Azerbaycan'ın muhteşem dağ manzaralarını dünyaya tanıtmak amacıyla tutkulu bir grup dağcı tarafından kuruldu. İlk günümüzden beri binlerce turisti dağların büyülü dünyasıyla tanıştırdık.">PeakExplorer, Azərbaycanın möhtəşəm dağ mənzərələrini dünyaya tanıtmaq məqsədi ilə bir qrup həvəsli alpinist tərəfindən qurulub. İlk günümüzdən bəri minlərlə turisti dağların sehrli dünyası ilə tanış etdik.</p>
+                <p data-lang-az="Missiyamız hər kəsə təhlükəsiz və unudulmaz dağ macərası yaşatmaqdır. Peşəkar komandamız, keyfiyyətli avadanlıqlarımız və diqqətli planlaşdırmamızla sizə ən yaxşı xidməti təqdim edirik." data-lang-en="Our mission is to provide everyone with a safe and unforgettable mountain adventure. With our professional team, quality equipment and careful planning, we offer you the best service." data-lang-ru="Наша миссия - обеспечить каждому безопасное и незабываемое горное приключение. С нашей профессиональной командой, качественным оборудованием и тщательным планированием мы предлагаем вам лучший сервис." data-lang-tr="Misyonumuz herkese güvenli ve unutulmaz bir dağ macerası yaşatmaktır. Profesyonel ekibimiz, kaliteli ekipmanlarımız ve dikkatli planlamanızla size en iyi hizmeti sunuyoruz.">Missiyamız hər kəsə təhlükəsiz və unudulmaz dağ macərası yaşatmaqdır. Peşəkar komandamız, keyfiyyətli avadanlıqlarımız və diqqətli planlaşdırmamızla sizə ən yaxşı xidməti təqdim edirik.</p>
+            </div>
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600" alt="PeakExplorer Team">
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="about-stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-icon">🏔️</span>
+                <span class="stat-number">10+</span>
+                <span class="stat-label" data-lang-az="İl Təcrübə" data-lang-en="Years Experience" data-lang-ru="Лет опыта" data-lang-tr="Yıl Deneyim">İl Təcrübə</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">👥</span>
+                <span class="stat-number">5000+</span>
+                <span class="stat-label" data-lang-az="Məmnun Müştəri" data-lang-en="Happy Customers" data-lang-ru="Довольных клиентов" data-lang-tr="Mutlu Müşteri">Məmnun Müştəri</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">🎯</span>
+                <span class="stat-number">1000+</span>
+                <span class="stat-label" data-lang-az="Uğurlu Tur" data-lang-en="Successful Tours" data-lang-ru="Успешных туров" data-lang-tr="Başarılı Tur">Uğurlu Tur</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">🏆</span>
+                <span class="stat-number">50+</span>
+                <span class="stat-label" data-lang-az="Peşəkar Bələdçi" data-lang-en="Professional Guides" data-lang-ru="Профессиональных гидов" data-lang-tr="Profesyonel Rehber">Peşəkar Bələdçi</span>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="about-values">
+        <div class="values-container">
+            <div class="values-header">
+                <span class="section-label" data-lang-az="Dəyərlərimiz" data-lang-en="Our Values" data-lang-ru="Наши ценности" data-lang-tr="Değerlerimiz">Dəyərlərimiz</span>
+                <h2 data-lang-az="Nəyə inanırıq" data-lang-en="What we believe in" data-lang-ru="Во что мы верим" data-lang-tr="Neye inanıyoruz">Nəyə inanırıq</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <span class="value-icon">🛡️</span>
+                    <h3 data-lang-az="Təhlükəsizlik" data-lang-en="Safety" data-lang-ru="Безопасность" data-lang-tr="Güvenlik">Təhlükəsizlik</h3>
+                    <p data-lang-az="İştirakçılarımızın təhlükəsizliyi hər şeydən öncə gəlir. Bütün turlarımız sertifikatlı bələdçilər tərəfindən aparılır və tam sığorta ilə təmin edilir." data-lang-en="The safety of our participants comes before everything. All our tours are conducted by certified guides and fully insured." data-lang-ru="Безопасность наших участников превыше всего. Все наши туры проводятся сертифицированными гидами и полностью застрахованы." data-lang-tr="Katılımcılarımızın güvenliği her şeyden önce gelir. Tüm turlarımız sertifikalı rehberler tarafından yürütülür ve tam sigortalıdır.">İştirakçılarımızın təhlükəsizliyi hər şeydən öncə gəlir. Bütün turlarımız sertifikatlı bələdçilər tərəfindən aparılır və tam sığorta ilə təmin edilir.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">⭐</span>
+                    <h3 data-lang-az="Keyfiyyət" data-lang-en="Quality" data-lang-ru="Качество" data-lang-tr="Kalite">Keyfiyyət</h3>
+                    <p data-lang-az="Ən yaxşı avadanlıq, ən təcrübəli bələdçilər və ən diqqətli planlaşdırma ilə sizə premium xidmət təqdim edirik." data-lang-en="We provide premium service with the best equipment, most experienced guides and most careful planning." data-lang-ru="Мы предоставляем премиум-сервис с лучшим оборудованием, самыми опытными гидами и тщательным планированием." data-lang-tr="En iyi ekipman, en deneyimli rehberler ve en dikkatli planlama ile size premium hizmet sunuyoruz.">Ən yaxşı avadanlıq, ən təcrübəli bələdçilər və ən diqqətli planlaşdırma ilə sizə premium xidmət təqdim edirik.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🌿</span>
+                    <h3 data-lang-az="Ekoloji Məsuliyyət" data-lang-en="Eco Responsibility" data-lang-ru="Экологическая ответственность" data-lang-tr="Ekolojik Sorumluluk">Ekoloji Məsuliyyət</h3>
+                    <p data-lang-az="Təbiəti qorumaq bizim borcumuzdur. 'İz qoyma' prinsipinə əməl edir, yerli ekosistemləri qoruyuruq." data-lang-en="Protecting nature is our duty. We follow the 'leave no trace' principle and protect local ecosystems." data-lang-ru="Защита природы - наш долг. Мы следуем принципу 'не оставлять следов' и защищаем местные экосистемы." data-lang-tr="Doğayı korumak bizim görevimizdir. 'İz bırakma' ilkesine uyuyor, yerel ekosistemleri koruyoruz.">Təbiəti qorumaq bizim borcumuzdur. 'İz qoyma' prinsipinə əməl edir, yerli ekosistemləri qoruyuruq.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">❤️</span>
+                    <h3 data-lang-az="Həvəs" data-lang-en="Passion" data-lang-ru="Страсть" data-lang-tr="Tutku">Həvəs</h3>
+                    <p data-lang-az="Dağları sevirik və bu sevgini sizinlə bölüşmək istəyirik. Hər tur bizim üçün yeni bir macəradır." data-lang-en="We love mountains and want to share this love with you. Every tour is a new adventure for us." data-lang-ru="Мы любим горы и хотим поделиться этой любовью с вами. Каждый тур для нас - новое приключение." data-lang-tr="Dağları seviyoruz ve bu sevgiyi sizinle paylaşmak istiyoruz. Her tur bizim için yeni bir maceradır.">Dağları sevirik və bu sevgini sizinlə bölüşmək istəyirik. Hər tur bizim üçün yeni bir macəradır.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="about-team">
+        <div class="team-container">
+            <div class="team-header">
+                <span class="section-label" data-lang-az="Komandamız" data-lang-en="Our Team" data-lang-ru="Наша команда" data-lang-tr="Ekibimiz">Komandamız</span>
+                <h2 data-lang-az="Peşəkar bələdçilərimizlə tanış olun" data-lang-en="Meet our professional guides" data-lang-ru="Познакомьтесь с нашими профессиональными гидами" data-lang-tr="Profesyonel rehberlerimizle tanışın">Peşəkar bələdçilərimizlə tanış olun</h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-card" onclick="openGuideModal('elchin')">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300" alt="Elçin Məmmədov">
+                    </div>
+                    <div class="team-info">
+                        <h3>Elçin Məmmədov</h3>
+                        <span class="team-role" data-lang-az="Baş Bələdçi" data-lang-en="Head Guide" data-lang-ru="Главный гид" data-lang-tr="Baş Rehber">Baş Bələdçi</span>
+                        <p data-lang-az="15 il təcrübə • Alpinizm mütəxəssisi" data-lang-en="15 years experience • Alpinism specialist" data-lang-ru="15 лет опыта • Специалист по альпинизму" data-lang-tr="15 yıl deneyim • Alpinizm uzmanı">15 il təcrübə • Alpinizm mütəxəssisi</p>
+                    </div>
+                </div>
+                <div class="team-card" onclick="openGuideModal('leyla')">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300" alt="Leyla Həsənova">
+                    </div>
+                    <div class="team-info">
+                        <h3>Leyla Həsənova</h3>
+                        <span class="team-role" data-lang-az="Trekking Bələdçisi" data-lang-en="Trekking Guide" data-lang-ru="Гид по треккингу" data-lang-tr="Trekking Rehberi">Trekking Bələdçisi</span>
+                        <p data-lang-az="8 il təcrübə • Ekoturizm eksperti" data-lang-en="8 years experience • Ecotourism expert" data-lang-ru="8 лет опыта • Эксперт по экотуризму" data-lang-tr="8 yıl deneyim • Ekoturizm uzmanı">8 il təcrübə • Ekoturizm eksperti</p>
+                    </div>
+                </div>
+                <div class="team-card" onclick="openGuideModal('rashad')">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300" alt="Rəşad Əliyev">
+                    </div>
+                    <div class="team-info">
+                        <h3>Rəşad Əliyev</h3>
+                        <span class="team-role" data-lang-az="Qış Turları Bələdçisi" data-lang-en="Winter Tours Guide" data-lang-ru="Гид по зимним турам" data-lang-tr="Kış Turları Rehberi">Qış Turları Bələdçisi</span>
+                        <p data-lang-az="10 il təcrübə • Xizək instruktoru" data-lang-en="10 years experience • Ski instructor" data-lang-ru="10 лет опыта • Инструктор по лыжам" data-lang-tr="10 yıl deneyim • Kayak eğitmeni">10 il təcrübə • Xizək instruktoru</p>
+                    </div>
+                </div>
+                <div class="team-card" onclick="openGuideModal('nigar')">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300" alt="Nigar Quliyeva">
+                    </div>
+                    <div class="team-info">
+                        <h3>Nigar Quliyeva</h3>
+                        <span class="team-role" data-lang-az="Mədəni Turlar Bələdçisi" data-lang-en="Cultural Tours Guide" data-lang-ru="Гид по культурным турам" data-lang-tr="Kültür Turları Rehberi">Mədəni Turlar Bələdçisi</span>
+                        <p data-lang-az="6 il təcrübə • Tarixçi" data-lang-en="6 years experience • Historian" data-lang-ru="6 лет опыта • Историк" data-lang-tr="6 yıl deneyim • Tarihçi">6 il təcrübə • Tarixçi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <div class="guide-modal" id="guideModal">
+        <div class="guide-modal-content">
+            <button class="modal-close" onclick="closeGuideModal()">✕</button>
+            <div class="guide-modal-body">
+                <div class="guide-modal-image">
+                    <img id="guideModalImage" src="" alt="">
+                </div>
+                <div class="guide-modal-info">
+                    <h2 id="guideModalName"></h2>
+                    <span class="guide-modal-role" id="guideModalRole"></span>
+                    <div class="guide-modal-stats">
+                        <div class="guide-stat">
+                            <span class="guide-stat-value" id="guideModalExp"></span>
+                            <span class="guide-stat-label" data-lang-az="İl Təcrübə" data-lang-en="Years Experience" data-lang-ru="Лет опыта" data-lang-tr="Yıl Deneyim">İl Təcrübə</span>
+                        </div>
+                        <div class="guide-stat">
+                            <span class="guide-stat-value" id="guideModalTours"></span>
+                            <span class="guide-stat-label" data-lang-az="Tur" data-lang-en="Tours" data-lang-ru="Туров" data-lang-tr="Tur">Tur</span>
+                        </div>
+                        <div class="guide-stat">
+                            <span class="guide-stat-value" id="guideModalRating"></span>
+                            <span class="guide-stat-label" data-lang-az="Reytinq" data-lang-en="Rating" data-lang-ru="Рейтинг" data-lang-tr="Puan">Reytinq</span>
+                        </div>
+                    </div>
+                    <p class="guide-modal-bio" id="guideModalBio"></p>
+                    <div class="guide-modal-certs">
+                        <h4 data-lang-az="Sertifikatlar" data-lang-en="Certifications" data-lang-ru="Сертификаты" data-lang-tr="Sertifikalar">Sertifikatlar</h4>
+                        <ul id="guideModalCerts"></ul>
+                    </div>
+                    <div class="guide-modal-langs">
+                        <h4 data-lang-az="Dillər" data-lang-en="Languages" data-lang-ru="Языки" data-lang-tr="Diller">Dillər</h4>
+                        <div id="guideModalLangs"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <section class="about-cta">
+        <div class="cta-content">
+            <h2 data-lang-az="Bizimlə səyahətə hazırsınız?" data-lang-en="Ready for an adventure with us?" data-lang-ru="Готовы к приключению с нами?" data-lang-tr="Bizimle maceraya hazır mısınız?">Bizimlə səyahətə hazırsınız?</h2>
+            <p data-lang-az="İndi qeydiyyatdan keçin və növbəti turumuza qoşulun" data-lang-en="Register now and join our next tour" data-lang-ru="Зарегистрируйтесь сейчас и присоединяйтесь к нашему следующему туру" data-lang-tr="Şimdi kaydolun ve bir sonraki turumuza katılın">İndi qeydiyyatdan keçin və növbəti turumuza qoşulun</p>
+            <div class="cta-buttons">
+                <a href="index.html#tours" class="btn btn-primary" data-lang-az="Turları Gör" data-lang-en="View Tours" data-lang-ru="Посмотреть туры" data-lang-tr="Turları Gör">Turları Gör</a>
+                <a href="contact.html" class="btn btn-secondary" data-lang-az="Əlaqə" data-lang-en="Contact" data-lang-ru="Контакты" data-lang-tr="İletişim">Əlaqə</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang-az="© 2025 PeakExplorer. Bütün hüquqlar qorunur." data-lang-en="© 2025 PeakExplorer. All rights reserved." data-lang-ru="© 2025 PeakExplorer. Все права защищены." data-lang-tr="© 2025 PeakExplorer. Tüm hakları saklıdır.">© 2025 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    <script>
+        const guidesData = {
+            elchin: {
+                name: 'Elçin Məmmədov',
+                role: { az: 'Baş Bələdçi', en: 'Head Guide', ru: 'Главный гид', tr: 'Baş Rehber' },
+                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
+                experience: 15,
+                tours: 450,
+                rating: '4.9',
+                bio: {
+                    az: 'Elçin 15 ildən artıqdır ki, dağ turizmində fəaliyyət göstərir. Bazardüzü zirvəsini 20 dəfədən çox fəth edib. Beynəlxalq alpinizm sertifikatlarına malikdir və bir neçə xilasetmə əməliyyatında iştirak edib. Azərbaycan Alpinizm Federasiyasının üzvüdür.',
+                    en: 'Elchin has been active in mountain tourism for over 15 years. He has conquered Bazarduzu peak more than 20 times. He holds international alpinism certificates and has participated in several rescue operations. He is a member of the Azerbaijan Alpinism Federation.',
+                    ru: 'Эльчин работает в горном туризме более 15 лет. Он покорил вершину Базардюзю более 20 раз. Имеет международные сертификаты по альпинизму и участвовал в нескольких спасательных операциях. Член Федерации альпинизма Азербайджана.',
+                    tr: 'Elçin 15 yılı aşkın süredir dağ turizminde aktif. Bazardüzü zirvesini 20\'den fazla kez fethetti. Uluslararası dağcılık sertifikalarına sahip ve birçok kurtarma operasyonuna katıldı. Azerbaycan Dağcılık Federasyonu üyesidir.'
+                },
+                certs: ['UIAGM Alpinizm Sertifikatı', 'İlk Yardım Sertifikatı', 'Xilasetmə Təlimi', 'Hava Proqnozu Mütəxəssisi'],
+                languages: ['🇦🇿 Azərbaycan', '🇷🇺 Русский', '🇬🇧 English']
+            },
+            leyla: {
+                name: 'Leyla Həsənova',
+                role: { az: 'Trekking Bələdçisi', en: 'Trekking Guide', ru: 'Гид по треккингу', tr: 'Trekking Rehberi' },
+                image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400',
+                experience: 8,
+                tours: 280,
+                rating: '4.8',
+                bio: {
+                    az: 'Leyla ekoturizm və təbiət mühafizəsi sahəsində mütəxəssisdir. Xınalıq, Lahıc və digər tarixi kəndlərə turlar təşkil edir. Biologiya üzrə magistr dərəcəsinə malikdir və dağ florası haqqında geniş biliyə sahibdir.',
+                    en: 'Leyla is a specialist in ecotourism and nature conservation. She organizes tours to Khinalig, Lahij and other historical villages. She holds a master\'s degree in biology and has extensive knowledge about mountain flora.',
+                    ru: 'Лейла - специалист по экотуризму и охране природы. Организует туры в Хыналыг, Лагич и другие исторические села. Имеет степень магистра биологии и обширные знания о горной флоре.',
+                    tr: 'Leyla ekoturizm ve doğa koruma uzmanıdır. Hınalık, Lahıc ve diğer tarihi köylere turlar düzenler. Biyoloji alanında yüksek lisans derecesine sahip ve dağ florası hakkında geniş bilgiye sahiptir.'
+                },
+                certs: ['Ekoturizm Sertifikatı', 'İlk Yardım Sertifikatı', 'Botanika Eksperti', 'Fotoqrafiya Kursu'],
+                languages: ['🇦🇿 Azərbaycan', '🇬🇧 English', '🇹🇷 Türkçe']
+            },
+            rashad: {
+                name: 'Rəşad Əliyev',
+                role: { az: 'Qış Turları Bələdçisi', en: 'Winter Tours Guide', ru: 'Гид по зимним турам', tr: 'Kış Turları Rehberi' },
+                image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400',
+                experience: 10,
+                tours: 320,
+                rating: '4.9',
+                bio: {
+                    az: 'Rəşad professional xizəkçi və qış idmanları mütəxəssisidir. Şahdağ və Tufandağ kurortlarında 10 il instruktor kimi çalışıb. Qar uçqunları və qış təhlükəsizliyi üzrə sertifikatlara malikdir.',
+                    en: 'Rashad is a professional skier and winter sports specialist. He has worked as an instructor at Shahdag and Tufandag resorts for 10 years. He holds certifications in avalanche safety and winter safety.',
+                    ru: 'Рашад - профессиональный лыжник и специалист по зимним видам спорта. 10 лет работал инструктором на курортах Шахдаг и Туфандаг. Имеет сертификаты по лавинной и зимней безопасности.',
+                    tr: 'Reşad profesyonel kayakçı ve kış sporları uzmanıdır. Şahdağ ve Tufandağ tatil köylerinde 10 yıl eğitmen olarak çalıştı. Çığ ve kış güvenliği sertifikalarına sahiptir.'
+                },
+                certs: ['FIS Xizək Instruktoru', 'Çığ Təhlükəsizliyi', 'Dağ Xilasetməsi', 'İlk Yardım'],
+                languages: ['🇦🇿 Azərbaycan', '🇷🇺 Русский', '🇬🇧 English']
+            },
+            nigar: {
+                name: 'Nigar Quliyeva',
+                role: { az: 'Mədəni Turlar Bələdçisi', en: 'Cultural Tours Guide', ru: 'Гид по культурным турам', tr: 'Kültür Turları Rehberi' },
+                image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400',
+                experience: 6,
+                tours: 180,
+                rating: '4.7',
+                bio: {
+                    az: 'Nigar tarix üzrə doktorantura tələbəsidir və Azərbaycanın qədim mədəniyyəti haqqında dərin biliyə malikdir. Qobustan, Xınalıq və digər tarixi məkanlara mədəni turlar təşkil edir. 4 dildə ekskursiya apara bilir.',
+                    en: 'Nigar is a PhD student in history and has deep knowledge about Azerbaijan\'s ancient culture. She organizes cultural tours to Gobustan, Khinalig and other historical places. She can conduct excursions in 4 languages.',
+                    ru: 'Нигяр - аспирант исторического факультета, глубоко знает древнюю культуру Азербайджана. Организует культурные туры в Гобустан, Хыналыг и другие исторические места. Может проводить экскурсии на 4 языках.',
+                    tr: 'Nigar tarih doktora öğrencisidir ve Azerbaycan\'ın kadim kültürü hakkında derin bilgiye sahiptir. Gobustan, Hınalık ve diğer tarihi mekanlara kültür turları düzenler. 4 dilde tur yapabilir.'
+                },
+                certs: ['Turizm Gid Lisenziyası', 'Arxeologiya Kursu', 'İlk Yardım', 'Fotoqrafiya'],
+                languages: ['🇦🇿 Azərbaycan', '🇷🇺 Русский', '🇬🇧 English', '🇹🇷 Türkçe']
+            }
+        };
+        let currentLanguage = localStorage.getItem('language') || 'az';
+        
+        const langFlags = { 'az': '🇦🇿', 'en': '🇬🇧', 'ru': '🇷🇺', 'tr': '🇹🇷' };
+        const langNames = { 'az': 'AZ', 'en': 'EN', 'ru': 'RU', 'tr': 'TR' };
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+            
+            // Update language option buttons
+            document.querySelectorAll('.lang-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            // Update language dropdown button
+            const langBtn = document.getElementById('langDropdownBtn');
+            if (langBtn) {
+                const flagEl = langBtn.querySelector('.lang-flag');
+                const currentEl = langBtn.querySelector('.lang-current');
+                if (flagEl) flagEl.textContent = langFlags[lang];
+                if (currentEl) currentEl.textContent = langNames[lang];
+            }
+            
+            // Update all elements with data-lang attributes
+            document.querySelectorAll('[data-lang-az]').forEach(el => {
+                const text = el.getAttribute(`data-lang-${lang}`) || el.getAttribute('data-lang-az');
+                if (text) el.textContent = text;
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-placeholder-az]').forEach(el => {
+                const placeholder = el.getAttribute(`data-placeholder-${lang}`) || el.getAttribute('data-placeholder-az');
+                if (placeholder) el.placeholder = placeholder;
+            });
+            
+            // Update select options
+            document.querySelectorAll('select option[data-lang-az]').forEach(option => {
+                const text = option.getAttribute(`data-lang-${lang}`) || option.getAttribute('data-lang-az');
+                if (text) option.textContent = text;
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Close dropdowns
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+        }
+        function openGuideModal(guideId) {
+            const guide = guidesData[guideId];
+            if (!guide) return;
+
+            document.getElementById('guideModalImage').src = guide.image;
+            document.getElementById('guideModalName').textContent = guide.name;
+            document.getElementById('guideModalRole').textContent = guide.role[currentLanguage] || guide.role.az;
+            document.getElementById('guideModalExp').textContent = guide.experience;
+            document.getElementById('guideModalTours').textContent = guide.tours;
+            document.getElementById('guideModalRating').textContent = '⭐ ' + guide.rating;
+            document.getElementById('guideModalBio').textContent = guide.bio[currentLanguage] || guide.bio.az;
+            
+            document.getElementById('guideModalCerts').innerHTML = guide.certs.map(cert => `<li>✓ ${cert}</li>`).join('');
+            document.getElementById('guideModalLangs').innerHTML = guide.languages.map(lang => `<span class="lang-tag">${lang}</span>`).join('');
+
+            document.getElementById('guideModal').classList.add('active');
+        }
+
+        function closeGuideModal() {
+            document.getElementById('guideModal').classList.remove('active');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            changeLanguage(currentLanguage);
+            document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const dropdown = this.closest('.nav-dropdown');
+                    const isActive = dropdown.classList.contains('active');
+                    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+                    if (!isActive) dropdown.classList.add('active');
+                });
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-dropdown')) {
+                    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+                }
+            });
+            
+            document.querySelectorAll('.lang-option').forEach(btn => {
+                btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
+            });
+            document.getElementById('guideModal').addEventListener('click', function(e) {
+                if (e.target === this) closeGuideModal();
+            });
+            
+            // Search modal functions
+            function openSearchModal() {
+                const modal = document.getElementById('searchModal');
+                if (modal) {
+                    modal.classList.add('active');
+                    const input = document.getElementById('searchInput');
+                    if (input) input.focus();
+                }
+            }
+            
+            function closeSearchModal() {
+                const modal = document.getElementById('searchModal');
+                if (modal) {
+                    modal.classList.remove('active');
+                    const input = document.getElementById('searchInput');
+                    if (input) input.value = '';
+                    const results = document.getElementById('searchResults');
+                    if (results) {
+                        results.innerHTML = `
+                            <div class="search-placeholder">
+                                <span>🔍</span>
+                                <p data-lang-az="Axtarış nəticələri burada görünəcək" data-lang-en="Search results will appear here" data-lang-ru="Результаты поиска появятся здесь" data-lang-tr="Arama sonuçları burada görünecek">Axtarış nəticələri burada görünəcək</p>
+                            </div>
+                        `;
+                    }
+                }
+            }
+            
+            const searchToggleBtn = document.getElementById('searchToggleBtn');
+            const searchCloseBtn = document.getElementById('searchCloseBtn');
+            const searchModal = document.getElementById('searchModal');
+            
+            if (searchToggleBtn) {
+                searchToggleBtn.addEventListener('click', openSearchModal);
+            }
+            
+            if (searchCloseBtn) {
+                searchCloseBtn.addEventListener('click', closeSearchModal);
+            }
+            
+            if (searchModal) {
+                searchModal.addEventListener('click', function(e) {
+                    if (e.target === this) closeSearchModal();
+                });
+            }
+            
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeSearchModal();
+                }
+            });
+        });
+        
+        const CURRENT_USER_KEY = 'peakexplorer_current_user';
+        function checkSession() {
+            const savedUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    document.getElementById('authButtons').style.display = 'none';
+                    document.getElementById('userProfile').style.display = 'block';
+                    document.getElementById('userName').textContent = user.name || 'İstifadəçi';
+                } catch (e) {}
+            }
+        }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            window.location.reload();
+        }
+        checkSession();
+        
+        document.getElementById('userDropdownBtn')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.nav-dropdown');
+            const isActive = dropdown.classList.contains('active');
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+            if (!isActive) dropdown.classList.add('active');
+        });
+        
+        // Chatbot functions
+        let chatbotOpen = false;
+        
+        function toggleChatbot() {
+            chatbotOpen = !chatbotOpen;
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            const chatbotBadge = document.getElementById('chatbotBadge');
+            if (chatbotWindow) chatbotWindow.classList.toggle('active', chatbotOpen);
+            if (chatbotBadge) chatbotBadge.classList.add('hidden');
+        }
+        
+        function sendSuggestion(text) {
+            const chatInput = document.getElementById('chatInput');
+            if (chatInput) {
+                chatInput.value = text;
+                sendMessage();
+            }
+        }
+        
+        function handleChatKeypress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            if (!input) return;
+            const message = input.value.trim();
+            if (!message) return;
+            addMessage(message, 'user');
+            input.value = '';
+            showTyping();
+            setTimeout(() => {
+                hideTyping();
+                const response = generateResponse(message);
+                addMessage(response, 'bot');
+            }, 1000 + Math.random() * 1000);
+        }
+        
+        function formatMessage(text) {
+            let formatted = text
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>');
+            formatted = formatted.replace(/(\d+️⃣)\s+(.+?)(?=\d+️⃣|<br>|$)/g, '<div style="margin: 0.5rem 0; padding-left: 0.5rem;"><strong>$1</strong> $2</div>');
+            formatted = formatted.replace(/([📏📍⛰️📅💰🎯🏨💡❄️🌲🎫🌤️📊⚠️✅📱🚨⭐🥇🥈🥉📋💳📧🕒💬🏔️🎒🍽️🚗📅🌸☀️🍂🎒🏕️])/g, '<span style="font-size: 1.1em;">$1</span>');
+            return `<p style="white-space: pre-line;">${formatted}</p>`;
+        }
+        
+        function addMessage(text, type) {
+            const messagesDiv = document.getElementById('chatbotMessages');
+            if (!messagesDiv) return;
+            const avatar = type === 'bot' ? '🤖' : '👤';
+            const formattedText = type === 'bot' ? formatMessage(text) : text;
+            const messageHtml = `
+                <div class="chat-message ${type}">
+                    <span class="message-avatar">${avatar}</span>
+                    <div class="message-content">
+                        ${type === 'bot' ? formattedText : `<p>${text}</p>`}
+                    </div>
+                </div>
+            `;
+            messagesDiv.insertAdjacentHTML('beforeend', messageHtml);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function showTyping() {
+            const messagesDiv = document.getElementById('chatbotMessages');
+            if (!messagesDiv) return;
+            const typingHtml = `
+                <div class="chat-message bot" id="typingIndicator">
+                    <span class="message-avatar">🤖</span>
+                    <div class="message-content">
+                        <div class="typing-indicator">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            messagesDiv.insertAdjacentHTML('beforeend', typingHtml);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function hideTyping() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+        
+        function generateResponse(message) {
+            const lowerMsg = message.toLowerCase();
+            const lang = localStorage.getItem('language') || 'az';
+            
+            const responses = {
+                az: {
+                    greeting: 'Salam! 👋 Mən PeakBot-am. Azərbaycanın dağları, turlar, otellər, restoranlar və səyahət məsləhətləri haqqında suallarınıza cavab verə bilərəm. Sizə necə kömək edə bilərəm?',
+                    thanks: 'Dəyməz! 😊 Başqa sualınız varsa, soruşmaqdan çəkinməyin. Yaxşı səyahətlər və unudulmaz xatirələr! 🏔️',
+                    default: 'Maraqlı sual! Dağlar, turlar, otellər, restoranlar, maşın kirayəsi və ya səyahət məsləhətləri haqqında daha dəqiq sual versəniz, sizə daha yaxşı kömək edə bilərəm. 🏔️',
+                    bazarduzu: '🏔️ **Bazardüzü** - Azərbaycanın ən hündür zirvəsi!\n\n📏 Hündürlük: 4466 metr\n📍 Yerləşmə: Qusar rayonu, Böyük Qafqaz silsiləsi\n⛰️ Çətinlik: Mürəkkəb (təcrübəli alpinistlər üçün)\n\n📅 Ən yaxşı vaxt: İyul-Sentyabr ayları\n💰 Tur qiyməti: ₼1200-dən başlayır\n\n🎯 Fəaliyyətlər: Alpinizm, trekking, foto-tur, düşərgə\n🏨 Yaxın otellər: Şahdağ Resort, Qusar Park Hotel\n\n💡 Məsləhət: Hündür zirvə olduğu üçün fiziki hazırlıq və xüsusi avadanlıq tələb olunur. Dağ bələdçisi ilə getmək tövsiyə olunur.',
+                    shahdag: '⛷️ **Şahdağ** - Azərbaycanın ən populyar qış kurortu!\n\n📏 Hündürlük: 4243 metr\n📍 Yerləşmə: Qusar rayonu\n⛰️ Çətinlik: Orta\n\n❄️ Qış fəaliyyətləri: Xizək, snowboard, paraqlaydinq\n🌲 Yay fəaliyyətləri: Trekking, ATV turu, təbiət gəzintiləri\n\n🏨 Otel qiymətləri: ₼250-400/gecə\n🎫 Kanat yolu: Mövcuddur\n\n💡 Məsləhət: Həm qışda, həm yayda ziyarət edə bilərsiniz. Qışda xizək üçün, yayda isə təbiət görmək üçün mükəmməl yerdir. Əvvəlcədən rezervasiya etmək tövsiyə olunur.',
+                    tufandag: '🏔️ **Tufandağ** - Qəbələnin gözəlliyi!\n\n📏 Hündürlük: 4191 metr\n📍 Yerləşmə: Qəbələ rayonu\n⛰️ Çətinlik: Asan (ailə üçün uyğun)\n\n🎫 Kanat yolu: Azərbaycanın ən uzun kanat yolu (3.2 km)\n💰 Kanat yolu bileti: ₼15\n\n❄️ Qış: Xizək imkanı\n🌲 Yay: Hiking, təbiət gəzintiləri\n\n💡 Məsləhət: Ailə ilə səyahət üçün mükəmməl seçim. Yaxınlıqda Qəbələ şəhəri və digər turizm obyektləri var.',
+                    tours: '🎒 **Ən Populyar Turlarımız:**\n\n1️⃣ **Şahdağ Qış Turu** - ₼450\n   ❄️ Xizək, snowboard, qış əyləncələri\n\n2️⃣ **Bazardüzü Alpinizm** - ₼1200\n   ⛰️ Azərbaycanın ən hündür zirvəsinə çıxış\n\n3️⃣ **Xınalıq Mədəni Tur** - ₼350\n   🏘️ Qədim kənd, mədəni irs, autentik yeməklər\n\n4️⃣ **Qəbələ Weekend** - ₼200\n   🎢 Əyləncə parkı, təbiət, rahatlıq\n\n5️⃣ **Şəki Mədəni Tur** - ₼280\n   🏛️ Tarixi abidələr, Şəki xan sarayı\n\n📱 Ana səhifədəki "Turlar" bölməsinə baxın daha ətraflı məlumat üçün!',
+                    hotels: '🏨 **Ən Yaxşı Otellərimiz:**\n\n⭐ **Premium Otellər:**\n• Şahdağ Hotel & Spa (5⭐) - ₼350/gecə\n  Spa, restoran, xizək yolu yaxınlığında\n\n• Pik Palace (5⭐) - ₼400/gecə\n  Lüks otaqlar, panoramik görünüş\n\n• Qafqaz Riverside (5⭐) - ₼320/gecə\n  Çay kənarında, təbiət içində\n\n⭐ **Orta Qiymətli:**\n• Qusar Park Hotel (4⭐) - ₼150/gecə\n• Qəbələ Resort (4⭐) - ₼180/gecə\n\n💡 Məsləhət: Qış mövsümündə (dekabr-mart) əvvəlcədən rezervasiya etmək vacibdir. Otellər səhifəsinə keçid edin rezervasiya üçün!',
+                    restaurants: '🍽️ **Dağ Bölgələrində Ən Yaxşı Restoranlar:**\n\n🥇 **Premium:**\n• Şahdağ Dağ Restoranı - Premium mətbəx, panoramik görünüş\n• Altitude Restaurant - Müasir Avropa mətbəxi\n\n🥈 **Ənənəvi:**\n• Şəki Piti Evi - Ənənəvi Azərbaycan yeməkləri\n• Xınalıq Ev Yeməkləri - Autentik ləzgi mətbəxi\n• Qusar Milli Mətbəx - Regional spesiallar\n\n🥉 **Kafe və Snack:**\n• Dağ Evi - Qəhvə, dessert, yüngül yeməklər\n• Şahdağ Lounge - İçkilər və snack\n\n💡 Məsləhət: Restoranlar səhifəsinə baxın menyu və rezervasiya üçün!',
+                    carRental: '🚗 **Maşın Kirayəsi:**\n\nDağ turları üçün **SUV/4x4** maşınlar tövsiyə olunur.\n\n💰 **Qiymət Aralığı:**\n• Ekonom (kiçik maşın) - ₼50-60/gün\n• Orta (sedan) - ₼80-100/gün\n• SUV/4x4 - ₼120-180/gün\n• Premium (lüks) - ₼200-300/gün\n\n📋 **Daxildir:**\n✓ Sığorta\n✓ 24/7 dəstək\n✓ GPS navigasiya\n✓ Uşaq oturacağı (tələb olunarsa)\n\n💡 Məsləhət: Qışda 4x4 maşın seçmək vacibdir. Maşın Kirayəsi səhifəsinə keçin rezervasiya üçün!',
+                    weather: '🌤️ **Dağ Hava Şəraiti:**\n\nDağ hava şəraiti dəyişkəndir və tez dəyişə bilər.\n\n📊 **Ümumi Məlumat:**\n• Hündür zirvələrdə hətta yayda soyuq ola bilər\n• Qışda temperatur -10°C-dən aşağı düşə bilər\n• Yayda gündüz +20-25°C, gecə +5-10°C\n\n💡 **Məsləhətlər:**\n✓ Həmişə qat-qat geyinmək (layering)\n✓ Külək və yağışdan qoruyan geyim\n✓ Günəş gözlüyü və krem (UV qoruyucu)\n✓ Dağ səhifəsində hər dağın cari hava durumunu yoxlayın\n\n⚠️ Xəbərdarlıq: Hava şəraiti pisləşərsə, turları ləğv etmək daha yaxşıdır.',
+                    price: '💰 **Qiymət Məlumatları:**\n\n🏔️ **Turlar:**\n• Qısa turlar (1-2 gün): ₼200-450\n• Orta turlar (3-5 gün): ₼600-1200\n• Uzun turlar (6+ gün): ₼1500+\n\n🏨 **Otellər (gecə):**\n• Ekonom: ₼80-150\n• Orta: ₼150-250\n• Premium: ₼250-400\n• Lüks: ₼400+\n\n🍽️ **Yemək:**\n• Kafe: ₼15-30/şəxs\n• Restoran: ₼30-80/şəxs\n• Premium: ₼80+/şəxs\n\n🚗 **Nəqliyyat:**\n• Maşın kirayəsi: ₼50-300/gün\n• Transfer: ₼100-200\n\n💡 Məsləhət: Qış mövsümündə qiymətlər yüksələ bilər. Əvvəlcədən rezervasiya etmək qənaət edir.',
+                    season: '📅 **Mövsüm Məsləhətləri:**\n\n❄️ **Qış (Dekabr-Mart):**\n• Xizək və qış idmanları\n• Şahdağ və Tufandağ ən populyar\n• Otel rezervasiyası vacibdir\n• Qiymətlər yüksəkdir\n\n🌸 **Yaz (Aprel-May):**\n• Təbiət gözəlliyi, çiçəklər\n• Hiking üçün mükəmməl\n• Mülayim hava\n\n☀️ **Yay (İyun-Avqust):**\n• Alpinizm üçün ən yaxşı vaxt\n• Bazardüzü və digər zirvələr\n• Gecə düşərgəsi\n• Açıq hava fəaliyyətləri\n\n🍂 **Payız (Sentyabr-Noyabr):**\n• Rəngarəng təbiət\n• Mülayim hava\n• Foto-tur üçün ideal\n\n💡 Hər mövsümün öz gözəlliyi var!',
+                    equipment: '🎒 **Lazımi Avadanlıq:**\n\n⛰️ **Alpinizm/Trekking:**\n✓ Dağ botları (su keçirməz)\n✓ Trekking çubuqları\n✓ Bel çantası (20-30L)\n✓ İstilik geyimi (qat-qat)\n✓ Yağış paltosu\n✓ Günəş gözlüyü və krem\n✓ Su və qida\n✓ İlk yardım dəsti\n\n❄️ **Qış Xizəyi:**\n✓ Xizək botları və xizəklər\n✓ Qoruyucu geyim\n✓ Günəş gözlüyü\n✓ Eldiven və papaq\n\n🏕️ **Düşərgə:**\n✓ Çadır və yuxu çantası\n✓ Mat və yastıq\n✓ Fənər və batareyalar\n✓ Qazan və qablar\n\n💡 Məsləhət: Avadanlıq kirayəsi də mövcuddur. Turlarımızda bəzi avadanlıq daxildir.',
+                    safety: '⚠️ **Təhlükəsizlik Məsləhətləri:**\n\n✅ **Əsas Qaydalar:**\n• Həmişə dağ bələdçisi ilə gedin\n• Hava şəraitini yoxlayın\n• Fiziki hazırlığınızı qiymətləndirin\n• Avadanlığınızı yoxlayın\n• Yol planını paylaşın\n\n📱 **Vacib:**\n• Telefon batareyasını doldurun\n• GPS və xəritə götürün\n• İlk yardım dəsti\n• Fərdi identifikasiya\n\n🚨 **Təcili:**\n• 112 - Təcili yardım\n• Dağ xilasetmə xidməti\n\n💡 Məsləhət: Təcrübəsiz olanlar üçün mütləq bələdçi ilə getmək tövsiyə olunur. Təhlükəsizlik hər şeydən vacibdir!',
+                    booking: '📅 **Rezervasiya:**\n\n✅ **Necə Rezervasiya Etmək:**\n1. Saytda istədiyiniz tur/otel/restoranı seçin\n2. Tarix və vaxt seçin\n3. Məlumatları doldurun\n4. Ödəniş edin\n\n💳 **Ödəniş:**\n• Onlayn kartla ödəniş\n• Bank köçürməsi\n• Nağd ödəniş (müəyyən hallarda)\n\n📧 **Təsdiq:**\n• Email ilə rezervasiya təsdiqi\n• SMS bildirişi\n• Telefon zəngi (tələb olunarsa)\n\n💡 Məsləhət: Qış mövsümündə ən azı 2-3 həftə əvvəlcədən rezervasiya etmək tövsiyə olunur. Ləğv etmə siyasəti hər xidmət üçün fərqlidir.',
+                    contact: '📞 **Əlaqə Məlumatları:**\n\n📧 Email: info@peakexplorer.az\n📱 Telefon: +994 12 XXX XX XX\n💬 WhatsApp: +994 50 XXX XX XX\n\n🕒 **İş Saatları:**\nBazar ertəsi - Cümə: 09:00 - 18:00\nŞənbə: 10:00 - 16:00\nBazar: Qeyri-iş günü\n\n📍 **Ofis:**\nBakı şəhəri, [Ünvan]\n\n💡 Bizimlə əlaqə saxlayın suallarınız və rezervasiyalar üçün!',
+                    help: '💬 **Mən sizə kömək edə bilərəm:**\n\n🏔️ Dağlar haqqında məlumat\n🎒 Tur paketləri və qiymətlər\n🏨 Otel tövsiyələri və rezervasiya\n🍽️ Restoranlar və yemək\n🚗 Maşın kirayəsi\n🌤️ Hava şəraiti\n📅 Mövsüm məsləhətləri\n🎒 Avadanlıq tövsiyələri\n⚠️ Təhlükəsizlik məsləhətləri\n\n💡 Daha dəqiq sual versəniz, daha yaxşı kömək edə bilərəm!'
+                },
+                en: {
+                    greeting: 'Hello! 👋 I\'m PeakBot. I can answer your questions about Azerbaijan\'s mountains, tours, hotels, restaurants, and travel advice. How can I help you?',
+                    thanks: 'You\'re welcome! 😊 If you have any other questions, don\'t hesitate to ask. Have great travels and unforgettable memories! 🏔️',
+                    default: 'Interesting question! If you ask a more specific question about mountains, tours, hotels, restaurants, car rental, or travel advice, I can help you better. 🏔️',
+                    bazarduzu: '🏔️ **Bazardüzü** - Azerbaijan\'s highest peak!\n\n📏 Height: 4466 meters\n📍 Location: Qusar district, Greater Caucasus range\n⛰️ Difficulty: Hard (for experienced climbers)\n\n📅 Best time: July-September\n💰 Tour price: Starting from ₼1200\n\n🎯 Activities: Mountaineering, trekking, photo tour, camping\n🏨 Nearby hotels: Shahdag Resort, Qusar Park Hotel\n\n💡 Tip: Physical preparation and special equipment are required due to the high altitude. It is recommended to go with a mountain guide.',
+                    shahdag: '⛷️ **Shahdag** - Azerbaijan\'s most popular winter resort!\n\n📏 Height: 4243 meters\n📍 Location: Qusar district\n⛰️ Difficulty: Medium\n\n❄️ Winter activities: Skiing, snowboarding, paragliding\n🌲 Summer activities: Trekking, ATV tour, nature walks\n\n🏨 Hotel prices: ₼250-400/night\n🎫 Cable car: Available\n\n💡 Tip: You can visit both in winter and summer. Perfect for skiing in winter and enjoying nature in summer. Advance booking is recommended.',
+                    tufandag: '🏔️ **Tufandağ** - Gabala\'s beauty!\n\n📏 Height: 4191 meters\n📍 Location: Gabala district\n⛰️ Difficulty: Easy (family-friendly)\n\n🎫 Cable car: Azerbaijan\'s longest cable car (3.2 km)\n💰 Cable car ticket: ₼15\n\n❄️ Winter: Skiing available\n🌲 Summer: Hiking, nature walks\n\n💡 Tip: Perfect choice for family trips. Gabala city and other tourist attractions are nearby.',
+                    tours: '🎒 **Our Most Popular Tours:**\n\n1️⃣ **Shahdag Winter Tour** - ₼450\n   ❄️ Skiing, snowboarding, winter fun\n\n2️⃣ **Bazardüzü Mountaineering** - ₼1200\n   ⛰️ Climb to Azerbaijan\'s highest peak\n\n3️⃣ **Khinalug Cultural Tour** - ₼350\n   🏘️ Ancient village, cultural heritage, authentic food\n\n4️⃣ **Gabala Weekend** - ₼200\n   🎢 Amusement park, nature, relaxation\n\n5️⃣ **Sheki Cultural Tour** - ₼280\n   🏛️ Historical monuments, Sheki Khan Palace\n\n📱 Check the "Tours" section on the homepage for more details!',
+                    hotels: '🏨 **Our Best Hotels:**\n\n⭐ **Premium Hotels:**\n• Shahdag Hotel & Spa (5⭐) - ₼350/night\n  Spa, restaurant, near ski slopes\n\n• Pik Palace (5⭐) - ₼400/night\n  Luxury rooms, panoramic views\n\n• Caucasus Riverside (5⭐) - ₼320/night\n  By the river, in nature\n\n⭐ **Mid-Range:**\n• Qusar Park Hotel (4⭐) - ₼150/night\n• Gabala Resort (4⭐) - ₼180/night\n\n💡 Tip: Advance booking is essential during winter season (December-March). Visit the Hotels page to book!',
+                    restaurants: '🍽️ **Best Restaurants in Mountain Regions:**\n\n🥇 **Premium:**\n• Shahdag Mountain Restaurant - Premium cuisine, panoramic views\n• Altitude Restaurant - Modern European cuisine\n\n🥈 **Traditional:**\n• Sheki Piti House - Traditional Azerbaijani dishes\n• Khinalug Home Cooking - Authentic Lezgi cuisine\n• Qusar National Cuisine - Regional specialties\n\n🥉 **Cafes & Snacks:**\n• Mountain House - Coffee, desserts, light meals\n• Shahdag Lounge - Drinks and snacks\n\n💡 Tip: Check the Restaurants page for menus and reservations!',
+                    carRental: '🚗 **Car Rental:**\n\n**SUV/4x4** vehicles are recommended for mountain tours.\n\n💰 **Price Range:**\n• Economy (small car) - ₼50-60/day\n• Mid-size (sedan) - ₼80-100/day\n• SUV/4x4 - ₼120-180/day\n• Premium (luxury) - ₼200-300/day\n\n📋 **Included:**\n✓ Insurance\n✓ 24/7 support\n✓ GPS navigation\n✓ Child seat (if needed)\n\n💡 Tip: Choosing a 4x4 vehicle is essential in winter. Visit the Car Rental page to book!',
+                    weather: '🌤️ **Mountain Weather:**\n\nMountain weather is variable and can change quickly.\n\n📊 **General Information:**\n• High peaks can be cold even in summer\n• Winter temperatures can drop below -10°C\n• Summer: +20-25°C during day, +5-10°C at night\n\n💡 **Tips:**\n✓ Always dress in layers\n✓ Wind and rain protection\n✓ Sunglasses and sunscreen (UV protection)\n✓ Check current weather for each mountain on the mountain page\n\n⚠️ Warning: If weather conditions worsen, it\'s better to cancel tours.',
+                    price: '💰 **Price Information:**\n\n🏔️ **Tours:**\n• Short tours (1-2 days): ₼200-450\n• Medium tours (3-5 days): ₼600-1200\n• Long tours (6+ days): ₼1500+\n\n🏨 **Hotels (per night):**\n• Economy: ₼80-150\n• Mid-range: ₼150-250\n• Premium: ₼250-400\n• Luxury: ₼400+\n\n🍽️ **Food:**\n• Cafe: ₼15-30/person\n• Restaurant: ₼30-80/person\n• Premium: ₼80+/person\n\n🚗 **Transportation:**\n• Car rental: ₼50-300/day\n• Transfer: ₼100-200\n\n💡 Tip: Prices may increase during winter season. Advance booking saves money.',
+                    season: '📅 **Seasonal Advice:**\n\n❄️ **Winter (December-March):**\n• Skiing and winter sports\n• Shahdag and Tufandağ most popular\n• Hotel booking essential\n• Higher prices\n\n🌸 **Spring (April-May):**\n• Nature beauty, flowers\n• Perfect for hiking\n• Mild weather\n\n☀️ **Summer (June-August):**\n• Best time for mountaineering\n• Bazardüzü and other peaks\n• Night camping\n• Outdoor activities\n\n🍂 **Autumn (September-November):**\n• Colorful nature\n• Mild weather\n• Ideal for photo tours\n\n💡 Each season has its own beauty!',
+                    equipment: '🎒 **Required Equipment:**\n\n⛰️ **Mountaineering/Trekking:**\n✓ Mountain boots (waterproof)\n✓ Trekking poles\n✓ Backpack (20-30L)\n✓ Warm clothing (layered)\n✓ Rain jacket\n✓ Sunglasses and sunscreen\n✓ Water and food\n✓ First aid kit\n\n❄️ **Winter Skiing:**\n✓ Ski boots and skis\n✓ Protective clothing\n✓ Sunglasses\n✓ Gloves and hat\n\n🏕️ **Camping:**\n✓ Tent and sleeping bag\n✓ Mat and pillow\n✓ Flashlight and batteries\n✓ Stove and cookware\n\n💡 Tip: Equipment rental is also available. Some equipment is included in our tours.',
+                    safety: '⚠️ **Safety Tips:**\n\n✅ **Basic Rules:**\n• Always go with a mountain guide\n• Check weather conditions\n• Assess your physical fitness\n• Check your equipment\n• Share your route plan\n\n📱 **Important:**\n• Charge phone battery\n• Bring GPS and map\n• First aid kit\n• Personal identification\n\n🚨 **Emergency:**\n• 112 - Emergency services\n• Mountain rescue service\n\n💡 Tip: Inexperienced climbers should definitely go with a guide. Safety is more important than anything!',
+                    booking: '📅 **Booking:**\n\n✅ **How to Book:**\n1. Select your desired tour/hotel/restaurant on the site\n2. Choose date and time\n3. Fill in information\n4. Make payment\n\n💳 **Payment:**\n• Online card payment\n• Bank transfer\n• Cash payment (in certain cases)\n\n📧 **Confirmation:**\n• Booking confirmation by email\n• SMS notification\n• Phone call (if needed)\n\n💡 Tip: It is recommended to book at least 2-3 weeks in advance during winter season. Cancellation policy varies for each service.',
+                    contact: '📞 **Contact Information:**\n\n📧 Email: info@peakexplorer.az\n📱 Phone: +994 12 XXX XX XX\n💬 WhatsApp: +994 50 XXX XX XX\n\n🕒 **Working Hours:**\nMonday - Friday: 09:00 - 18:00\nSaturday: 10:00 - 16:00\nSunday: Day off\n\n📍 **Office:**\nBaku city, [Address]\n\n💡 Contact us for questions and bookings!',
+                    help: '💬 **I can help you with:**\n\n🏔️ Information about mountains\n🎒 Tour packages and prices\n🏨 Hotel recommendations and booking\n🍽️ Restaurants and food\n🚗 Car rental\n🌤️ Weather conditions\n📅 Seasonal advice\n🎒 Equipment recommendations\n⚠️ Safety tips\n\n💡 If you ask a more specific question, I can help you better!'
+                }
+            };
+            
+            const resp = responses[lang] || responses['az'];
+            
+            if (lowerMsg.includes('salam') || lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey') || lowerMsg.includes('привет') || lowerMsg.includes('merhaba')) {
+                return resp.greeting;
+            }
+            if (lowerMsg.includes('təşəkkür') || lowerMsg.includes('sağol') || lowerMsg.includes('thanks') || lowerMsg.includes('thank you') || lowerMsg.includes('спасибо') || lowerMsg.includes('teşekkür')) {
+                return resp.thanks;
+            }
+            if (lowerMsg.includes('bazardüzü') || lowerMsg.includes('bazarduzu') || lowerMsg.includes('bazarduzi')) {
+                return resp.bazarduzu;
+            }
+            if (lowerMsg.includes('şahdağ') || lowerMsg.includes('shahdag') || lowerMsg.includes('шахдаг') || lowerMsg.includes('shah dag')) {
+                return resp.shahdag;
+            }
+            if (lowerMsg.includes('tufandağ') || lowerMsg.includes('tufandag') || lowerMsg.includes('туфандаг') || lowerMsg.includes('tufan dag')) {
+                return resp.tufandag;
+            }
+            if (lowerMsg.includes('tur') || lowerMsg.includes('tour') || lowerMsg.includes('туры') || lowerMsg.includes('turlar') || lowerMsg.includes('turları')) {
+                return resp.tours;
+            }
+            if (lowerMsg.includes('otel') || lowerMsg.includes('hotel') || lowerMsg.includes('отель') || lowerMsg.includes('oteller') || lowerMsg.includes('otellər')) {
+                return resp.hotels;
+            }
+            if (lowerMsg.includes('restoran') || lowerMsg.includes('yemək') || lowerMsg.includes('mətbəx') || lowerMsg.includes('restaurant') || lowerMsg.includes('ресторан') || lowerMsg.includes('yemek') || lowerMsg.includes('yemekler')) {
+                return resp.restaurants;
+            }
+            if (lowerMsg.includes('maşın') || lowerMsg.includes('kiraye') || lowerMsg.includes('avtomobil') || lowerMsg.includes('car') || lowerMsg.includes('rental') || lowerMsg.includes('машина') || lowerMsg.includes('araba') || lowerMsg.includes('kiralama')) {
+                return resp.carRental;
+            }
+            if (lowerMsg.includes('hava') || lowerMsg.includes('weather') || lowerMsg.includes('погода') || lowerMsg.includes('hava durumu') || lowerMsg.includes('temperatur') || lowerMsg.includes('temperature')) {
+                return resp.weather;
+            }
+            if (lowerMsg.includes('qiymət') || lowerMsg.includes('price') || lowerMsg.includes('стоимость') || lowerMsg.includes('fiyat') || lowerMsg.includes('neçə') || lowerMsg.includes('how much') || lowerMsg.includes('сколько')) {
+                return resp.price;
+            }
+            if (lowerMsg.includes('mövsüm') || lowerMsg.includes('season') || lowerMsg.includes('сезон') || lowerMsg.includes('mevsim') || lowerMsg.includes('qış') || lowerMsg.includes('yay') || lowerMsg.includes('winter') || lowerMsg.includes('summer')) {
+                return resp.season;
+            }
+            if (lowerMsg.includes('avadanlıq') || lowerMsg.includes('equipment') || lowerMsg.includes('снаряжение') || lowerMsg.includes('ekipman') || lowerMsg.includes('nə götürməli') || lowerMsg.includes('what to bring')) {
+                return resp.equipment;
+            }
+            if (lowerMsg.includes('təhlükəsizlik') || lowerMsg.includes('safety') || lowerMsg.includes('безопасность') || lowerMsg.includes('güvenlik') || lowerMsg.includes('təhlükə') || lowerMsg.includes('danger')) {
+                return resp.safety;
+            }
+            if (lowerMsg.includes('rezervasiya') || lowerMsg.includes('booking') || lowerMsg.includes('бронирование') || lowerMsg.includes('rezervasyon') || lowerMsg.includes('sifariş') || lowerMsg.includes('order')) {
+                return resp.booking;
+            }
+            if (lowerMsg.includes('əlaqə') || lowerMsg.includes('contact') || lowerMsg.includes('контакт') || lowerMsg.includes('iletişim') || lowerMsg.includes('telefon') || lowerMsg.includes('phone') || lowerMsg.includes('email')) {
+                return resp.contact;
+            }
+            if (lowerMsg.includes('kömək') || lowerMsg.includes('help') || lowerMsg.includes('помощь') || lowerMsg.includes('yardım') || lowerMsg.includes('nə edə bilərəm') || lowerMsg.includes('what can')) {
+                return resp.help;
+            }
+            if (lowerMsg.includes('ən yaxşı') || lowerMsg.includes('best') || lowerMsg.includes('лучший') || lowerMsg.includes('en iyi') || lowerMsg.includes('hansı') || lowerMsg.includes('which')) {
+                if (lowerMsg.includes('tur') || lowerMsg.includes('tour')) {
+                    return resp.tours;
+                }
+            }
+            return resp.default;
+        }
+    </script>
+    
+    <!-- Chatbot HTML -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">
+            <span class="chatbot-icon">🤖</span>
+            <span class="chatbot-badge" id="chatbotBadge">1</span>
+        </button>
+        
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <span class="chatbot-avatar">🤖</span>
+                    <div>
+                        <h4>PeakBot</h4>
+                        <span class="chatbot-status" data-lang-az="🟢 Online" data-lang-en="🟢 Online" data-lang-ru="🟢 Онлайн" data-lang-tr="🟢 Çevrimiçi">🟢 Online</span>
+                    </div>
+                </div>
+                <button class="chatbot-close" onclick="toggleChatbot()">✕</button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chat-message bot">
+                    <span class="message-avatar">🤖</span>
+                    <div class="message-content">
+                        <p data-lang-az="Salam! Mən PeakBot-am 👋" data-lang-en="Hello! I'm PeakBot 👋" data-lang-ru="Привет! Я PeakBot 👋" data-lang-tr="Merhaba! Ben PeakBot 👋">Salam! Mən PeakBot-am 👋</p>
+                        <p data-lang-az="Azərbaycanın dağları, turlar və səyahətlər haqqında suallarınıza cavab verə bilərəm." data-lang-en="I can answer your questions about Azerbaijan's mountains, tours and travels." data-lang-ru="Я могу ответить на ваши вопросы о горах Азербайджана, турах и путешествиях." data-lang-tr="Azerbaycan'ın dağları, turları ve seyahatleri hakkında sorularınıza cevap verebilirim.">Azərbaycanın dağları, turlar və səyahətlər haqqında suallarınıza cavab verə bilərəm.</p>
+                    </div>
+                </div>
+                <div class="chat-suggestions">
+                    <button onclick="sendSuggestion('Ən yaxşı dağ turları hansılardır?')" data-lang-az="🏔️ Ən yaxşı turlar" data-lang-en="🏔️ Best tours" data-lang-ru="🏔️ Лучшие туры" data-lang-tr="🏔️ En iyi turlar">🏔️ Ən yaxşı turlar</button>
+                    <button onclick="sendSuggestion('Şahdağ haqqında məlumat')" data-lang-az="⛷️ Şahdağ" data-lang-en="⛷️ Shahdag" data-lang-ru="⛷️ Шахдаг" data-lang-tr="⛷️ Şahdağ">⛷️ Şahdağ</button>
+                    <button onclick="sendSuggestion('Otel tövsiyəsi')" data-lang-az="🏨 Otellər" data-lang-en="🏨 Hotels" data-lang-ru="🏨 Отели" data-lang-tr="🏨 Oteller">🏨 Otellər</button>
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" data-placeholder-az="Sualınızı yazın..." data-placeholder-en="Type your question..." data-placeholder-ru="Введите ваш вопрос..." data-placeholder-tr="Sorunuzu yazın..." placeholder="Sualınızı yazın..." onkeypress="handleChatKeypress(event)">
+                <button onclick="sendMessage()">📤</button>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        /* AI Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 9999;
+        }
+        
+        .chatbot-toggle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 30px rgba(26, 58, 82, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            animation: chatbotPulse 2s ease-in-out infinite, chatbotBounce 3s ease-in-out infinite;
+        }
+        
+        @keyframes chatbotPulse {
+            0%, 100% { box-shadow: 0 5px 30px rgba(26, 58, 82, 0.4), 0 0 0 0 rgba(232, 165, 75, 0.4); }
+            50% { box-shadow: 0 5px 30px rgba(26, 58, 82, 0.4), 0 0 0 15px rgba(232, 165, 75, 0); }
+        }
+        
+        @keyframes chatbotBounce {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-8px); }
+            50% { transform: translateY(0); }
+            75% { transform: translateY(-4px); }
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 40px rgba(26, 58, 82, 0.5);
+            animation: none;
+        }
+        
+        .chatbot-icon {
+            font-size: 2rem;
+            animation: chatbotIconWiggle 2.5s ease-in-out infinite;
+        }
+        
+        @keyframes chatbotIconWiggle {
+            0%, 100% { transform: rotate(0deg); }
+            10% { transform: rotate(-10deg); }
+            20% { transform: rotate(10deg); }
+            30% { transform: rotate(-10deg); }
+            40% { transform: rotate(10deg); }
+            50%, 100% { transform: rotate(0deg); }
+        }
+        
+        .chatbot-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 22px;
+            height: 22px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+        
+        .chatbot-badge.hidden {
+            display: none;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 520px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+        
+        .chatbot-window.active {
+            display: flex;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-header-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .chatbot-avatar {
+            font-size: 2rem;
+        }
+        
+        .chatbot-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .chatbot-status {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+        
+        .chatbot-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+        
+        .chatbot-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .chat-message {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 85%;
+        }
+        
+        .chat-message.bot {
+            align-self: flex-start;
+        }
+        
+        .chat-message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .message-content {
+            background: var(--color-light);
+            padding: 0.75rem 1rem;
+            border-radius: 16px;
+            border-top-left-radius: 4px;
+        }
+        
+        .chat-message.user .message-content {
+            background: var(--color-primary);
+            color: white;
+            border-radius: 16px;
+            border-top-right-radius: 4px;
+        }
+        
+        .message-content p {
+            margin: 0;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .message-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .chat-suggestions button {
+            background: white;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 0.4rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-suggestions button:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+        
+        .chatbot-input input:focus {
+            border-color: var(--color-primary);
+        }
+        
+        .chatbot-input button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-input button:hover {
+            background: var(--color-secondary);
+            transform: scale(1.05);
+        }
+        
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 0.5rem;
+        }
+        
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--color-text-light);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @media (max-width: 480px) {
+            .chatbot-window {
+                width: calc(100vw - 2rem);
+                right: -1rem;
+                height: 70vh;
+            }
+        }
+    </style>
+</body>
+</html>
